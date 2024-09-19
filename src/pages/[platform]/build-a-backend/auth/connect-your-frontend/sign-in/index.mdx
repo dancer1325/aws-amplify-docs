@@ -69,12 +69,12 @@ The quickest way to get started with Amplify Auth in your frontend application i
 <InlineFilter filters={["angular", "javascript", "nextjs", "react", "vue"]}>
 
 ```ts
-import { signIn } from 'aws-amplify/auth'
+import { signIn } from 'aws-amplify/auth';
 
 await signIn({
-  username: "hello@mycompany.com",
-  password: "hunter2",
-})
+  username: 'hello@mycompany.com',
+  password: 'hunter2'
+});
 ```
 
 </InlineFilter>
@@ -209,7 +209,7 @@ RxAmplify.Auth.signIn("username", "password")
 func signIn(username: String, password: String) async {
     do {
         let signInResult = try await Amplify.Auth.signIn(
-            username: username, 
+            username: username,
             password: password
         )
         if signInResult.isSignedIn {
@@ -230,7 +230,7 @@ func signIn(username: String, password: String) async {
 func signIn(username: String, password: String) -> AnyCancellable {
     Amplify.Publisher.create {
         try await Amplify.Auth.signIn(
-            username: username, 
+            username: username,
             password: password
         )
     }.sink {
@@ -253,28 +253,43 @@ func signIn(username: String, password: String) -> AnyCancellable {
 
 The `signIn` API response will include a `nextStep` property, which can be used to determine if further action is required. It may return the following next steps:
 
-<InlineFilter filters={["angular", "javascript", "react", "nextjs", "vue", "android"]}>
-- `CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED` - The user was created with a temporary password and must set a new one. Complete the process with `confirmSignIn`.
-- `CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE` - The sign-in must be confirmed with a custom challenge response. Complete the process with `confirmSignIn`.
-- `CONFIRM_SIGN_IN_WITH_TOTP_CODE` - The sign-in must be confirmed with a TOTP code from the user. Complete the process with `confirmSignIn`.
-- `CONTINUE_SIGN_IN_WITH_TOTP_SETUP` - The TOTP setup process must be continued. Complete the process with `confirmSignIn`.
-- `CONFIRM_SIGN_IN_WITH_SMS_CODE` - The sign-in must be confirmed with a SMS code from the user. Complete the process with `confirmSignIn`.
-- `CONTINUE_SIGN_IN_WITH_MFA_SELECTION` - The user must select their mode of MFA verification before signing in. Complete the process with `confirmSignIn`.
-- `RESET_PASSWORD` - The user must reset their password via `resetPassword`.
-- `CONFIRM_SIGN_UP` - The user hasn't completed the sign-up flow fully and must be confirmed via `confirmSignUp`.
-- `DONE` - The sign in process has been completed.
+<InlineFilter
+  filters={['angular', 'javascript', 'react', 'nextjs', 'vue', 'android']}
+>
+  - `CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED` - The user was created with a
+  temporary password and must set a new one. Complete the process with
+  `confirmSignIn`. - `CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE` - The sign-in must
+  be confirmed with a custom challenge response. Complete the process with
+  `confirmSignIn`. - `CONFIRM_SIGN_IN_WITH_TOTP_CODE` - The sign-in must be
+  confirmed with a TOTP code from the user. Complete the process with
+  `confirmSignIn`. - `CONTINUE_SIGN_IN_WITH_TOTP_SETUP` - The TOTP setup process
+  must be continued. Complete the process with `confirmSignIn`. -
+  `CONFIRM_SIGN_IN_WITH_SMS_CODE` - The sign-in must be confirmed with a SMS
+  code from the user. Complete the process with `confirmSignIn`. -
+  `CONTINUE_SIGN_IN_WITH_MFA_SELECTION` - The user must select their mode of MFA
+  verification before signing in. Complete the process with `confirmSignIn`. -
+  `RESET_PASSWORD` - The user must reset their password via `resetPassword`. -
+  `CONFIRM_SIGN_UP` - The user hasn't completed the sign-up flow fully and must
+  be confirmed via `confirmSignUp`. - `DONE` - The sign in process has been
+  completed.
 </InlineFilter>
 
-<InlineFilter filters={["swift", "flutter"]}>
-- `confirmSignInWithNewPassword` - The user was created with a temporary password and must set a new one. Complete the process with `confirmSignIn`.
-- `confirmSignInWithCustomChallenge` - The sign-in must be confirmed with a custom challenge response. Complete the process with `confirmSignIn`.
-- `confirmSignInWithTOTPCode` - The sign-in must be confirmed with a TOTP code from the user. Complete the process with `confirmSignIn`.
-- `continueSignInWithTOTPSetup` - The TOTP setup process must be continued. Complete the process with `confirmSignIn`.
-- `confirmSignInWithSMSMFACode` - The sign-in must be confirmed with a SMS code from the user. Complete the process with `confirmSignIn`.
-- `continueSignInWithMFASelection` - The user must select their mode of MFA verification before signing in. Complete the process with `confirmSignIn`.
-- `resetPassword` - The user must reset their password via `resetPassword`.
-- `confirmSignUp` - The user hasn't completed the sign-up flow fully and must be confirmed via `confirmSignUp`.
-- `done` - The sign in process has been completed.
+<InlineFilter filters={['swift', 'flutter']}>
+  - `confirmSignInWithNewPassword` - The user was created with a temporary
+  password and must set a new one. Complete the process with `confirmSignIn`. -
+  `confirmSignInWithCustomChallenge` - The sign-in must be confirmed with a
+  custom challenge response. Complete the process with `confirmSignIn`. -
+  `confirmSignInWithTOTPCode` - The sign-in must be confirmed with a TOTP code
+  from the user. Complete the process with `confirmSignIn`. -
+  `continueSignInWithTOTPSetup` - The TOTP setup process must be continued.
+  Complete the process with `confirmSignIn`. - `confirmSignInWithSMSMFACode` -
+  The sign-in must be confirmed with a SMS code from the user. Complete the
+  process with `confirmSignIn`. - `continueSignInWithMFASelection` - The user
+  must select their mode of MFA verification before signing in. Complete the
+  process with `confirmSignIn`. - `resetPassword` - The user must reset their
+  password via `resetPassword`. - `confirmSignUp` - The user hasn't completed
+  the sign-up flow fully and must be confirmed via `confirmSignUp`. - `done` -
+  The sign in process has been completed.
 </InlineFilter>
 
 For more information on handling the TOTP and MFA steps that may be returned, see [multi-factor authentication](/[platform]/build-a-backend/auth/concepts/multi-factor-authentication/).
@@ -284,19 +299,21 @@ For more information on handling the TOTP and MFA steps that may be returned, se
 <InlineFilter filters={["angular", "javascript", "nextjs", "react", "react-native", "vue"]}>
 
 ```ts title="src/main.ts"
-import { confirmSignIn, signIn } from 'aws-amplify/auth'
+import { confirmSignIn, signIn } from 'aws-amplify/auth';
 
 const { nextStep } = await signIn({
-  username: "hello@mycompany.com",
-  password: "hunter2",
-})
+  username: 'hello@mycompany.com',
+  password: 'hunter2'
+});
 
-if (nextStep === "CONFIRM_SIGN_IN_WITH_SMS_CODE") {
+if (nextStep === 'CONFIRM_SIGN_IN_WITH_SMS_CODE') {
   await confirmSignIn({
-    challengeResponse: "12345"
-  })
+    challengeResponse: '12345'
+  });
 }
 ```
+
+`signIn` API even allows you to continue confirm sign-in process after a redirection to a different location requiring a full browser reload, such as redirecting from a Login Page to a Confirm MFA Code Page in a Multi-Page Application during the sign-in process.
 
 </InlineFilter>
 <InlineFilter filters={["android"]}>
@@ -351,6 +368,7 @@ func confirmSignIn() -> AnyCancellable {
 </InlineFilter>
 
 {/* double-filter to conditionally display this section for only platforms that have examples */}
+
 <InlineFilter filters={["javascript", "nextjs", "react"]}>
 
 ### Practical Example
@@ -358,32 +376,32 @@ func confirmSignIn() -> AnyCancellable {
 <InlineFilter filters={["javascript", "nextjs", "react"]}>
 
 ```tsx title="src/App.tsx"
-import type { FormEvent } from "react"
-import { Amplify } from "aws-amplify"
+import type { FormEvent } from 'react';
+import { Amplify } from 'aws-amplify';
 // highlight-next-line
-import { signIn } from "aws-amplify/auth"
-import outputs from "../amplify_outputs.json"
+import { signIn } from 'aws-amplify/auth';
+import outputs from '../amplify_outputs.json';
 
-Amplify.configure(outputs)
+Amplify.configure(outputs);
 
 interface SignInFormElements extends HTMLFormControlsCollection {
-  email: HTMLInputElement
-  password: HTMLInputElement
+  email: HTMLInputElement;
+  password: HTMLInputElement;
 }
 
 interface SignInForm extends HTMLFormElement {
-  readonly elements: SignInFormElements
+  readonly elements: SignInFormElements;
 }
 
 export default function App() {
   async function handleSubmit(event: FormEvent<SignInForm>) {
-    event.preventDefault()
-    const form = event.currentTarget
+    event.preventDefault();
+    const form = event.currentTarget;
     // ... validate inputs
     await signIn({
       username: form.elements.email.value,
-      password: form.elements.password.value,
-    })
+      password: form.elements.password.value
+    });
   }
 
   return (
@@ -394,7 +412,7 @@ export default function App() {
       <input type="password" id="password" name="password" />
       <input type="submit" />
     </form>
-  )
+  );
 }
 ```
 
@@ -402,6 +420,7 @@ export default function App() {
 </InlineFilter>
 
 {/* with multi-factor auth */}
+
 ## With multi-factor auth enabled
 
 When multi-factor authentication (MFA) is **required** with SMS in your backend auth resource, you will need to pass the phone number during sign-up API call. If you are using the `email` or `username` as the primary sign-in mechanism, you will need to pass the `phone_number` attribute as a user attribute. This will change depending on if you enable SMS, TOTP, or both. Visit the [multi-factor authentication documentation](/[platform]/build-a-backend/auth/concepts/multi-factor-authentication/) to learn more about enabling MFA on your backend auth resource.
@@ -550,12 +569,28 @@ func signUp(username: String, password: String, email: String, phonenumber: Stri
 
 </InlineFilter>
 
-<InlineFilter filters={["angular", "javascript", "react", "nextjs", "vue", "flutter", "android"]}>
-You will then confirm sign-up, sign in, and receive a `nextStep` in the sign-in result of type `CONFIRM_SIGN_IN_WITH_SMS_MFA_CODE`. A confirmation code will also be texted to the phone number provided above. Pass the code you received to the `confirmSignIn` API:
+<InlineFilter
+  filters={[
+    'angular',
+    'javascript',
+    'react',
+    'nextjs',
+    'vue',
+    'flutter',
+    'android'
+  ]}
+>
+  You will then confirm sign-up, sign in, and receive a `nextStep` in the
+  sign-in result of type `CONFIRM_SIGN_IN_WITH_SMS_MFA_CODE`. A confirmation
+  code will also be texted to the phone number provided above. Pass the code you
+  received to the `confirmSignIn` API:
 </InlineFilter>
 
-<InlineFilter filters={["swift"]}>
-You will then confirm sign-up, sign in, and receive a `nextStep` in the sign-in result of type `confirmSignInWithSMSMFACode`. A confirmation code will also be texted to the phone number provided above. Pass the code you received to the `confirmSignIn` API:
+<InlineFilter filters={['swift']}>
+  You will then confirm sign-up, sign in, and receive a `nextStep` in the
+  sign-in result of type `confirmSignInWithSMSMFACode`. A confirmation code will
+  also be texted to the phone number provided above. Pass the code you received
+  to the `confirmSignIn` API:
 </InlineFilter>
 
 <InlineFilter filters={["android", "flutter", "react-native", "swift"]}>
@@ -595,7 +630,7 @@ Amplify.Auth.confirmSignIn("code received via SMS",
 ```kotlin
 try {
     val result = Amplify.Auth.confirmSignIn("code received via SMS")
-    Log.i("AuthQuickstart", "Confirmed signin: $result") 
+    Log.i("AuthQuickstart", "Confirmed signin: $result")
 } catch (error: AuthException) {
     Log.e("AuthQuickstart", "Failed to confirm signin", error)
 }
@@ -664,9 +699,9 @@ To sign in using an external identity provider such as Google, use the `signInWi
 <InlineFilter filters={["angular", "javascript", "nextjs", "react", "react-native", "vue"]}>
 
 ```ts
-import { signInWithRedirect } from "aws-amplify/auth"
+import { signInWithRedirect } from 'aws-amplify/auth';
 
-signInWithRedirect({ provider: "Google" })
+signInWithRedirect({ provider: 'Google' });
 ```
 
 <Callout info>
@@ -677,13 +712,14 @@ signInWithRedirect({ provider: "Google" })
 
 Alternatively if you have configured OIDC or SAML-based identity providers in your auth resource, you can specify a "custom" provider in `signInWithRedirect`:
 
-
 ```ts
-import { signInWithRedirect } from "aws-amplify/auth"
+import { signInWithRedirect } from 'aws-amplify/auth';
 
-signInWithRedirect({ provider: {
-  custom: "MyOidcProvider"
-}})
+signInWithRedirect({
+  provider: {
+    custom: 'MyOidcProvider'
+  }
+});
 ```
 
 ### Auto sign-in
@@ -803,12 +839,12 @@ Future<void> socialSignIn() async {
   }
 }
 ```
+
 </InlineFilter>
 <InlineFilter filters={['android']}>
 ## Update AndroidManifest.xml
 
-Add the following activity and queries tag to your app's `AndroidManifest.xml` file, replacing `myapp` with
-your redirect URI prefix if necessary:
+Add the following activity and queries tag to your app's `AndroidManifest.xml` file, replacing `myapp` with your redirect URI prefix if necessary:
 
 ```xml
 <application ...>
@@ -892,8 +928,7 @@ RxAmplify.Auth.signInWithSocialWebUI(AuthProvider.facebook(), this)
 <InlineFilter filters={['swift']}>
 ## Update Info.plist
 
-Sign-in with web UI requires the Amplify plugin to show up the sign-in UI inside a webview. After the sign-in process is complete it will redirect back to your app. 
-You have to enable this in your app's `Info.plist`. Right click Info.plist and then choose Open As > Source Code. Add the following entry in the URL scheme:
+Sign-in with web UI requires the Amplify plugin to show up the sign-in UI inside a webview. After the sign-in process is complete it will redirect back to your app. You have to enable this in your app's `Info.plist`. Right click Info.plist and then choose Open As > Source Code. Add the following entry in the URL scheme:
 
 ```xml
 
