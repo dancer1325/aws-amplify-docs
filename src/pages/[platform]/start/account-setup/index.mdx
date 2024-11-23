@@ -30,44 +30,38 @@ export function getStaticProps(context) {
   };
 }
 
-<Callout info>
-
-**Note**: If you already have an AWS account and profile configured locally, you do not need to follow this guide. Please add the`AmplifyBackendDeployFullAccess` IAM role to your configured AWS profile.
-
-</Callout>
-
-This guide will help you set up Temporary credentials with [IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html) and [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html), which will enable you to define Single-sign on (SSO), users, groups, permission sets, and more for your team. AWS Organizations can grow to house multiple AWS accounts. Users within the organization can traverse the AWS account(s) as their permission set allows.
-
-Amplify leverages the standard local credentials chain provider to simplify access to AWS services. While this guide highlights IAM Identity Center, you can explore additional methods for [authenticating with AWS locally](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html#getting-started-prereqs-keys).
-
-<Accordion title="IAM Identity Center terminology">
-
-IAM Identity Center enables users to sign in using a single user identity to access all their assigned AWS accounts, business applications, and custom applications in the AWS Cloud. This single sign-on capability reduces the complexity of managing multiple credentials and improves security by centralizing user authentication.
-
-### Users
-
-Users refers to the location where user identities and group information are stored and managed. IAM Identity Center can integrate with external identity sources like Microsoft Active Directory or use a built-in identity store provided by AWS.
-
-### Permission Set
-
-A collection of permissions that can be assigned to users or groups. Permission sets define what actions users are allowed to perform in your AWS accounts. They are similar to IAM policies but are used within the context of IAM Identity Center to manage access across multiple accounts.
+* goal
+  * AWS account set up -- to -- deploy | AWS -- from -- our local machine
+    * 👀if you ALREADY have an AWS account & profile configured locally -> add the`AmplifyBackendDeployFullAccess` IAM role | your configured AWS profile 👀
+    * set up Temporary credentials -- via -- [IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html) & [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+      * Reason: 🧠enable you to define Single-sign on (SSO), users, groups, permission sets, ... | your team 🧠
+      * see [additional methods -- for authenticating with -- AWS locally](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html#getting-started-prereqs-keys)
 
 ### AWS Organization
 
-AWS Organizations and IAM Identity Center work together to streamline management across multiple AWS accounts. AWS Organizations manages account structures and policies, while IAM Identity Center integrates with it to enable single sign-on and align permissions with organizational roles. This synergy ensures secure and consistent access control, simplifying user and permission management.
+* see [AWS Organization docs](https://github.com/dancer1325/aws-organizations-docs/tree/archived)
 
 ### Local Profiles
 
-Credentials are typically resolved through the use of [AWS profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-using-profiles). Profiles can contain permanent credentials or SSO metadata, and can be set for use with Amplify by using the same techniques as the AWS CLI:
-
-- with the `--profile` flag
-- with the `AWS_PROFILE` environment variable
+* see [AWS CLI configure profiles](https://github.com/dancer1325/aws-cli-user-guide/blob/main/doc_source/cli-configure-profiles.md)
 
 ### Temporary credentials
 
-An alternative to permanent credentials, enable you to define permissions for a _session_. Sessions are created when you [_assume_ an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) or sign in using AWS IAM Identity Center. These sessions come with an additional "session token" that is used to validate the temporary credentials and must be included on requests to AWS. As you are working locally, this will be presented as an additional environment variable.
+* == _session_
+  * ways to create
+    * [_assume_ an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) or
+    * sign in -- via -- AWS IAM Identity Center
+  * -- related with a -- "session token"
+    * uses
+      * validate the temporary credentials
+    * requirements
+      * include | requests to AWS
+  * == additional environment variable | working locally
 
-You can use temporary security credentials to make programmatic requests for AWS resources using the AWS CLI or AWS API (through the AWS SDKs). The temporary credentials provide the same permissions as long-term security credentials, such as IAM user credentials. However, there are a few differences, which are covered in the [AWS Identity and Access Management documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html).
+* TODO:
+You can use temporary security credentials to make programmatic requests for AWS resources using the AWS CLI or AWS API (through the AWS SDKs).
+The temporary credentials provide the same permissions as long-term security credentials, such as IAM user credentials.
+However, there are a few differences, which are covered in the [AWS Identity and Access Management documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html).
 
 </Accordion>
 
