@@ -1,39 +1,20 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-
-export const meta = {
-  title: 'Connected forms',
-  description:
-    'Generate React forms for creating and updating data in your Amplify data backend.',
-  platforms: [
-    'javascript',
-    'nextjs',
-    'react'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      platform: context.params.platform,
-      meta
-    }
-  };
-}
-
-
-Connected Forms are bound to a model in your app's data schema. Whenever a connected form is submitted, a record is automatically created or updated in the bound data model, with some or all of the form's input fields mapping to fields in the data model. Connected forms automatically work with any Amplify GraphQL API, and no `onSubmit` handling is required.
+* Connected Forms
+  * 👀-- are bound to a -- model | your app's data schema 👀
+  * once it's submitted -> record is automatically created or updated | bound data model
+    * / SOME or ALL of the form's input fields -- are mapped to -- fields | data model
+  * automatically work with any Amplify GraphQL API /
+    * 👀NO `onSubmit` handling is required 👀
 
 ## Generate forms
-First, install the Amplify UI library.
 
-```bash title="Terminal" showLineNumbers={false}
-npm add @aws-amplify/ui-react
-```
+* steps
+  * install the Amplify UI library
 
+    ```bash title="Terminal" showLineNumbers={false}
+    npm add @aws-amplify/ui-react
+    ```
+
+* TODO:
 To use connected forms, you first need to deploy a data model from your sandbox environment. We will use the same example as in the getting started [tutorial](/[platform]/start/quickstart).
 To get started run the following command from your project root:
 
@@ -59,7 +40,6 @@ File written: ui-components/index.js
 ### Re-generating forms
 
 In Gen 2, we automatically generate the form UI for you, which you can then customize and manage. If you decide to update your data model and need to regenerate the forms, please ensure you back up the original `ui-components` folder before executing the `npx ampx generate forms` command again.
-
 
 ## Render React form in your app
 
@@ -100,7 +80,6 @@ function App() {
 
 export default App;
 ```
-
 
 ## Types of forms
 
