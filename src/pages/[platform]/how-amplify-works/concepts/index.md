@@ -1,34 +1,3 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-
-export const meta = {
-  title: 'Concepts',
-  description:
-    'Learn about the Amplify fullstack TypeScript DX ',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      meta
-    }
-  };
-
-}
 
 * AWS Amplify Gen 2
   * how to define backends?
@@ -51,7 +20,7 @@ export function getStaticProps(context) {
 
 * authoring TypeScript -> you can provision backend infrastructure
 
-![How Amplify capabilities can be used together or independently.](/images/gen2/how-amplify-works/amplify-flow.png)
+![How Amplify capabilities can be used together or independently.](amplify-flow.png)
 * how to provision infrastructure Gen2 vs Gen 1
   * box at the bottom (outlined in pink)
   * | Gen 1,
@@ -77,7 +46,7 @@ export function getStaticProps(context) {
   * isolated
     * == EACH developer work on fullstack features / WITHOUT disrupting each other's environments
 
-![How cloud sandbox environments work.](/images/gen2/how-amplify-works/sandbox.png)
+![How cloud sandbox environments work.](sandbox.png)
 
 ### Fullstack Git-based environments
 
@@ -94,7 +63,7 @@ export function getStaticProps(context) {
   * -> Git repository == source of truth for state of the fullstack app
     * == ALL backend resources -- are defined as -- code
 
-![How fullstack deployments work.](/images/gen2/how-amplify-works/fullstack.png)
+![How fullstack deployments work.](fullstack.png)
 
 ### Unified management console
 
