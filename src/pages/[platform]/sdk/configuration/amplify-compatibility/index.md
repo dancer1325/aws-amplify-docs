@@ -1,36 +1,17 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal
+  * how to use the AWS SDK with Amplify v2. | Android
 
-export const meta = {
-  title: 'Amplify v2 Compatibility',
-  description:
-    'Learn how to use the AWS SDK with Amplify v2.',
-  platforms: ['android']
-};
+* ⚠️AWS Android Mobile Client (`com.amazonaws:aws-android-sdk-mobile-client`) -- NOT compatible each other -- Amplify Android v2 ⚠️
+  * Reason: 🧠Amplify v2 migrates the credentials | AWS Mobile Client -- into a -- different format -> AWS Mobile Client unable to read the credentials 🧠
 
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
+## Amplify V2 Auth + AWS Android SDK Plugin
 
-export function getStaticProps(context) {
-  return {
-    props: {
-      platform: context.params.platform,
-      meta
-    }
-  };
-}
-
-<InlineFilter filters={["android"]}>
-<Callout warning>
-The AWS Mobile Client (com.amazonaws:aws-android-sdk-mobile-client) and Amplify Android v2 are not compatible with each other. Amplify v2 migrates the credentials from AWS Mobile Client into a different format, leaving AWS Mobile Client unable to read the credentials. If AWS Mobile Client is launched after this migration has taken place, the Amplify v2 credentials will also be cleared.
-</Callout>
-
-## Using Amplify V2 Auth with AWS Android SDK Plugin
-
-We recommend using Amplify v2 with the [AWS Kotlin SDK](https://aws.amazon.com/sdk-for-kotlin/), rather than the AWS Android SDK. In order to better support existing implementations, this guide demonstrates how to continue using AWS Android SDK plugins with Amplify v2.
+* Amplify v2 + [AWS Kotlin SDK](https://aws.amazon.com/sdk-for-kotlin/)
+  * 👀rather than AWS Android SDK 👀
 
 ### Creating an AmplifyCredentialsProvider
 
+* TODO:
 Many of the AWS Android SDK plugins accept a custom `AWSCredentialsProvider` implementation. You can implement your own `AWSCredentialsProvider` that uses Amplify Android v2 to provide credentials. 
 
 <BlockSwitcher>
@@ -165,11 +146,17 @@ class AmplifyCredentialsProvider : AWSCredentialsProvider {
 
 You can now use your `AmplifyCredentialsProvider` in any plugins that accept an `AWSCredentialsProvider`, instead of using `AWSMobileClient.getInstance()` as your AWSCredentialsProvider.
 
-
 ## Providing AWS Configuration Information
 
-Amplify v2 uses the `amplify_outputs.json` file where AWS Android SDK uses the `awsconfiguration.json` file. If you are using both Amplify v2 and AWS Android SDK in your project, it is important to ensure the resources are in sync. The Amplify CLI still generates and updates both of these file types, but any manual customizations should be applied to both files.
+* `amplify_outputs.json`
+  * used by Amplify v2
+* `awsconfiguration.json`
+  * used by AWS Android SDK  
+* 👀if you are using Amplify v2 + AWS Android SDK -> sync `amplify_outputs.json` & `awsconfiguration.json`👀 
+  * Amplify CLI generates and updates BOTH previous files
+  * ⚠️MANUAL customizations should be applied | BOTH previous files⚠️ 
 
+* TODO:
 For AWS Android SDK plugins that require configuration information, you can continue to use the `AWSConfiguration` class.
 
 <BlockSwitcher>
