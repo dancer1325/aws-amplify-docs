@@ -1,39 +1,14 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-
-export const meta = {
-  title: 'Separate frontend and backend teams',
-  description:
-    'Set up multiple repositories with the Amplify CI/CD pipeline.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      meta
-    }
-  };
-
-}
-
-You might have different frontend and backend teams that maintain their own repositories. With Amplify Gen 2, you can deploy repositories that have backend-only code, so frontend and backend teams can operate independently of each other.
+* goal
+  * set up multiple repositories -- via -- Amplify CI/CD pipeline
+    * uses
+      * \>1 team / maintain their own repositories
+    * steps
+      * | Amplify Gen 2
+        * deploy repositories / backend-ONLY code
 
 ## Deploy the backend app
 
+* TODO:
 1. Run `mkdir backend-app && cd backend-app && npm create amplify@latest` to set up a backend-only Amplify project. Commit the code to a Git provider of your choice.
 
 1. Connect the `backend-app` in the new console. Navigate to the Amplify console and select **Create new app**.
@@ -166,6 +141,7 @@ frontend:
 ```
 
 <InlineFilter filters={['angular','javascript','nextjs','react','react-native','vue']}>
+
 ## Sharing schema type definitions
 
 If you're using Amplify Data, we recommend adding a `paths` entry in the `tsconfig.json` of your frontend app that points to the `amplify/data/resource.ts` file in your backend app to easily access your schema type definitions from your frontend apps.
