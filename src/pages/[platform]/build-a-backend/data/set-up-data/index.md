@@ -21,77 +21,94 @@
 
 ## Building your data backend
 
-* TODO:
-If you've run `npm create amplify@latest` already, you should see an `amplify/data/resource.ts` file, which is the central location to configure your data backend. The most important element is the `schema` object, which defines your backend data models (`a.model()`) and custom queries (`a.query()`), mutations (`a.mutation()`), and subscriptions (`a.subscription()`).
+* `amplify/data/resource.ts`
+  * 👀== central location -- to configure -- your data backend 👀
+  * if you run `npm create amplify@latest` -> `amplify/data/resource.ts` is created 
+  * `schema` object / properties
+    * `a.model()`
+      * backend data models
+      * 👀ALL -- automatically creates the -- following resources | cloud 👀
+        * DynamoDB database table / store records
+        * query and mutation APIs, about records, to
+          * create,
+          * read (list/get),
+          * update,
+          * delete
+        * `createdAt` and `updatedAt` about EACH record
+          * keep track of records
+        * real-time APIs about events of records, to subscribe for
+          * create,
+          * update,
+          * delete
+    * `a.query()`
+      * custom queries
+    * `a.mutation()`
+      * mutations
+    * `a.subscription()`
+      * subscriptions
 
-```ts title="amplify/data/resource.ts"
-import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
+* _Example:_ 
 
-const schema = a.schema({
-  Todo: a.model({
-      content: a.string(),
-      isDone: a.boolean()
-    })
-    .authorization(allow => [allow.publicApiKey()])
-});
+    ```ts title="amplify/data/resource.ts"
+    import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
+    
+    const schema = a.schema({
+      Todo: a.model({
+          content: a.string(),
+          isDone: a.boolean()
+        })
+        .authorization(allow => [allow.publicApiKey()])
+    });
+    
+    // Used for code completion / highlighting when making requests from frontend
+    export type Schema = ClientSchema<typeof schema>;
+    
+    // defines the data resource to be deployed
+    export const data = defineData({
+      schema,
+      authorizationModes: {
+        defaultAuthorizationMode: 'apiKey',
+        apiKeyAuthorizationMode: { expiresInDays: 30 }
+      }
+    });
+    ```
 
-// Used for code completion / highlighting when making requests from frontend
-export type Schema = ClientSchema<typeof schema>;
+* `allow.publicApiKey()`
+  * == rule / ANYONE authenticated -- via -- API key -> can about todos
+    * create,
+    * read,
+    * update,
+    * delete
 
-// defines the data resource to be deployed
-export const data = defineData({
-  schema,
-  authorizationModes: {
-    defaultAuthorizationMode: 'apiKey',
-    apiKeyAuthorizationMode: { expiresInDays: 30 }
-  }
-});
-```
+* ways to deploy these resources | your cloud sandbox
 
-Every `a.model()` automatically creates the following resources in the cloud:
+  * | ["react", "angular", "javascript", "vue", "nextjs", "react-native"]
 
-- a DynamoDB database table to store records
-- query and mutation APIs to create, read (list/get), update, and delete records
-- `createdAt` and `updatedAt` fields that help you keep track of when each record was initially created or when it was last updated
-- real-time APIs to subscribe for create, update, and delete events of records
+      ```bash title="Terminal" showLineNumbers={false}
+      npx ampx sandbox
+      ```
 
-The `allow.publicApiKey()` rule designates that anyone authenticated using an API key can create, read, update, and delete todos.
+  * | ["android"]
 
-To deploy these resources to your cloud sandbox, run the following CLI command in your terminal:
+      ```bash title="Terminal" showLineNumbers={false}
+      npx ampx sandbox --outputs-out-dir <path_to_app/src/main/res/raw/>
+      ```
 
-<InlineFilter filters={["react", "angular", "javascript", "vue", "nextjs", "react-native"]}>
+  * | ["swift"]
 
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox
-```
+      ```bash title="Terminal" showLineNumbers={false}
+      npx ampx sandbox --outputs-out-dir <path_to_swift_project>
+      ```
 
-</InlineFilter>
+  * | ["flutter"]
 
-<InlineFilter filters={["android"]}>
-
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox --outputs-out-dir <path_to_app/src/main/res/raw/>
-```
-
-</InlineFilter>
-
-<InlineFilter filters={["swift"]}>
-
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox --outputs-out-dir <path_to_swift_project>
-```
-
-</InlineFilter>
-<InlineFilter filters={["flutter"]}>
-
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox --outputs-format dart --outputs-out-dir lib
-```
-
-</InlineFilter>
+      ```bash title="Terminal" showLineNumbers={false}
+      npx ampx sandbox --outputs-format dart --outputs-out-dir lib
+      ```
 
 ## Connect your application code to the data backend
 
+* TODO:
 Once the cloud sandbox is up and running, it will also create an `amplify_outputs.json` file, which includes the relevant connection information to your data backend, like your API endpoint URL and API key.
 
 To connect your frontend code to your backend, you need to:
