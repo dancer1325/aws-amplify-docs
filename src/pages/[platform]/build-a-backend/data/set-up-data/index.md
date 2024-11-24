@@ -1,47 +1,27 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal
+  * how to set up Amplify Data
+    * == cloud API + database / -- via -- TS
+      * cloud API
+        * real-time API
+        * connects your app -- with -- new or existing data sources
+          * via 
+            * powered by AWS AppSync
+            * connect to an Amazon DynamoDB database 
+        * can be secured -- via -- authorization rules
+        * scale -- via -- AWS Lambda
+      * database
+        * define data model 
+          * once it's done -> Amplify deploys the real-time API for you 
+        * 👀back the API 👀
 
-export const meta = {
-  title: 'Set up Amplify Data',
-  description:
-    'Create a new cloud API that connects your app with new or existing data sources.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      meta
-    }
-  };
-
-}
-
-In this guide, you will learn how to set up Amplify Data. This includes building a real-time API and database using TypeScript to define your data model, and securing your API with authorization rules. We will also explore using AWS Lambda to scale to custom use cases.
-
-Before you begin, you will need:
-
-- [Node.js](https://nodejs.org/) v18.16.0 or later
-- [npm](https://www.npmjs.com/) v6.14.4 or later
-- [git](https://git-scm.com/) v2.14.1 or later
-
-With Amplify Data, you can build a secure, real-time API backed by a database in minutes. After you define your data model using TypeScript, Amplify will deploy a real-time API for you. This API is powered by AWS AppSync and connected to an Amazon DynamoDB database. You can secure your API with authorization rules and scale to custom use cases with AWS Lambda.
+* requirements
+  - [Node.js](https://nodejs.org/) v18.16.0+
+  - [npm](https://www.npmjs.com/) v6.14.4+
+  - [git](https://git-scm.com/) v2.14.1+
 
 ## Building your data backend
 
+* TODO:
 If you've run `npm create amplify@latest` already, you should see an `amplify/data/resource.ts` file, which is the central location to configure your data backend. The most important element is the `schema` object, which defines your backend data models (`a.model()`) and custom queries (`a.query()`), mutations (`a.mutation()`), and subscriptions (`a.subscription()`).
 
 ```ts title="amplify/data/resource.ts"
@@ -1264,10 +1244,6 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 
 </InlineFilter>
-
-## Conclusion
-
-Success! You've learned how to create your first real-time API and database with Amplify Data.
 
 ### Next steps
 
