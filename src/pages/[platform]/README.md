@@ -1,12 +1,22 @@
-READ ME
+* **Ways of working:**
+  * `next-release/main`
+    * commit changes / larger site update
+  * 1 branch / page
+    * branch from `next-release/main`
+    * Reason: 🧠reduce the size of PRs🧠
+  * PR Reviews
+    * submit PRs to `next-release/main`
 
-**Ways of working:** We are using `next-release/main` to commit changes for the larger site update.
-- One branch per page: Create your branch from `next-release/main` to get the latest updates for the new site. Please limit branches to a page or small chapter to reduce the size of PRs for tech and editorial reviews.
-- PR Reviews: When you have final copy ready for reviews, submit PRs to `next-release/main` to go through reviews and approvals.
+* **New IA:**
+  * this folder's menu == new docs IA organization 
+  * do NOT change `gen2`'s first-level folders ("build-a-backend", "build-ui", etc.) 
+  * EVERY new menu's entry can be selected -> every folder requires an "index.mdx"
 
-**New IA:** The menu in this folder follows the organization for the new docs IA. Please do not change first-level folders under `gen2` (build-a-backend, build-ui, etc.). Also, every entry in the new menu can be selected and for this reason every folder will require an index.mdx file. Those without content will include a card index to the submenu when required.
-
-**Folder structure:** Pages folders that host the root file (index.mdx) continue to drive the final URL. Use descriptive naming conventions for these folders to produce descriptive and SEO-friendly URLs. For example, src/pages/gen2/build-a-backend/auth/set-up-auth/index.mdx for https://docs.amplify.aws/gen2/build-a-backend/auth/set-up-auth/. Please use the index.mdx naming convention for your root folder files.
+* **Folder structure:**
+  * TODO: Pages folders that host the root file (index.mdx) continue to drive the final URL. 
+  * Use descriptive naming conventions for these folders to produce descriptive and SEO-friendly URLs.
+  * For example, src/pages/gen2/build-a-backend/auth/set-up-auth/index.mdx for https://docs.amplify.aws/gen2/build-a-backend/auth/set-up-auth/.
+  * Please use the index.mdx naming convention for your root folder files.
 
 **Platform switcher:** There is not a platform switcher for this folder, but we are organizing the folder and file structure to work with a switcher in the future. The new platform switcher will sit at the top of the pages folder and at the start of the URL, for example, src/pages/[platform]/start/getting-started/setup/index.mdx. Please make sure your root folder files use the index.mdx naming convention.
 
