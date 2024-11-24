@@ -104,3 +104,6 @@
 ## Schema reference
 
 * [here](https://github.com/aws-amplify/amplify-backend/blob/main/packages/client-config/src/client-config-schema/schema_v1.json).
+
+## Notes
+* 👀include `amplify_outputs.json` | '.gitignore' 👀
