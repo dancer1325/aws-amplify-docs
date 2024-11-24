@@ -1,55 +1,40 @@
-import { getChildPageNodes } from '@/utils/getChildPageNodes';
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal
+  * what Amplify Auth
+    * provisions
+    * supports
+    
+* security strategy
+  * == authentication method + security credentials + additional verification
 
-export const meta = {
-  title: 'Concepts',
-  description:
-    'Learn more about what Amplify Auth provisions and supports',
-  route: '/[platform]/build-a-backend/auth/concepts',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
+- _Authentication_ 
+  - == process / validate **who you are**
+  - _AuthN_
+    - abbreviation
+  - Identity Provider or IdP
+    - == system / does this validation
+    - types
+      - own self-hosted IdP
+      - cloud service
+- _Authorization_
+  - == process / validate **what you can access**
+  - _AuthZ_
+    - abbreviation
+  - ways to do it
+    - tokens / custom logic,
+    - predefined rules,
+    - signed requests with policies
 
-export function getStaticPaths() {
-  return getCustomStaticPath(meta.platforms);
-}
-
-export function getStaticProps() {
-  const childPageNodes = getChildPageNodes(meta.route);
-  return {
-    props: {
-      meta,
-      childPageNodes
-    }
-  };
-}
-
-Amplify helps you secure your application while providing an easy sign-in experience for your users. This experience is influenced by your security strategy. This security strategy includes the authentication method, security credentials, and enabling additional verification when needed.
-
-- _Authentication_ is a process to validate **who you are** (abbreviated as _AuthN_). The system that does this validation is referred to as an Identity Provider or IdP. This can be your own self-hosted IdP or a cloud service. Oftentimes, this IdP is an external provider such as Apple, Facebook, Google, or Amazon.
-- _Authorization_ is the process of validating **what you can access** (abbreviated as _AuthZ_). This is sometimes done by looking at tokens with custom logic, predefined rules, or signed requests with policies.
-
-Common authentication methods and associated risks include:
-
-- External provider federation which enables easier access for your users but shares data with third parties.
-
-You can improve security credentials and verification for these authentication methods by:
-
-- Modifying the default password policy to ensure your users create stronger passwords.
-- Requiring additional contact information from users before they can reset passwords.
-- Enabling multi-factor authentication (MFA) which adds a layer of security at sign-in but may also add friction for your users.
+* security credentials
+  * recommendations
+    * modify the default password policy / ensure your users -- create -- stronger passwords 
+* additional verification
+  * recommendations
+    * require additional contact information | BEFORE reset passwords
+    * enable MFA
 
 ## What is Amazon Cognito?
 
+* TODO:
 Amplify Auth is powered by [Amazon Cognito](https://aws.amazon.com/cognito/). Amazon Cognito is an identity and access management service, enabling you to secure your web or mobile applications, and is comprised of two services:
 
 1. [Amazon Cognito User Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html) is a full-featured user directory service to handle user registration, authentication, and account recovery
@@ -75,5 +60,3 @@ Amazon Cognito can be customized based on your security strategy for authenticat
 - If MFA is set to **required** with phone number for all users, you will need to include MFA setup (i.e. mandating phone number) when users sign up.
 
 Visit the [Amazon Cognito documentation](https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html) for more details on these settings, including [User pool attributes](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html) and [Adding MFA to a user pool](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
-
-<Overview childPageNodes={props.childPageNodes} />
