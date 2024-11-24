@@ -1,46 +1,25 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal
+  * set up a cloud sandbox environment
+    * == isolated development space /
+      * per-developer
+      * -- can connect to -- cloud resources 
+    * uses
+      * with your frontend dev environment
+    * allows
+      * rapidly | fullstack app
+        * build,
+        * test,
+        * iterate
 
-export const meta = {
-  title: 'Use cloud sandbox in dev environment',
-  description: 'Set up a cloud sandbox environment you can use with your frontend dev environment.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
+* Cloud sandbox environments
+  * uses
+    * NOT | production workloads
 
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      platform: context.params.platform,
-      meta
-    }
-  };
-}
-
-You can use a personal cloud sandbox environment that provides an isolated development space to rapidly build, test, and iterate on a fullstack app. Each developer on your team can use their own disposable sandbox environment connected to cloud resources.
-
-<Callout>
-
-Cloud sandbox environments are not intended for production workloads.
-
-</Callout>
-
-![How cloud sandbox environments work](/images/gen2/how-amplify-works/sandbox.png)
+![How cloud sandbox environments work](sandbox.png)
 
 ## Create a new sandbox environment
 
+* TODO:
 You can set up a new sandbox environment on your machine once you have an Amplify app set up. If you have not yet created an Amplify Gen 2 app, visit the [Quickstart](/[platform]/start/quickstart).
 
 First, open the terminal and run the following command:
