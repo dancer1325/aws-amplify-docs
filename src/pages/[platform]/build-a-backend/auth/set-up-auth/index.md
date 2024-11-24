@@ -1,36 +1,13 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal 
+  * authentication | Amplify
+    * how to 
+      * set up
+      * connect -- your backend resources
+      * 
 
-export const meta = {
-  title: 'Set up Amplify Auth',
-  description:
-    'Learn how to set up and connect your backend resources for authentication in Amplify.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export function getStaticPaths() {
-  return getCustomStaticPath(meta.platforms);
-}
-
-export function getStaticProps() {
-  return {
-    props: {
-      meta
-    }
-  };
-}
-
-Amplify Auth is powered by [Amazon Cognito](https://aws.amazon.com/cognito/). Cognito is a robust user directory service that handles user registration, authentication, account recovery, and other operations. [Review the concepts to learn more](/[platform]/build-a-backend/auth/concepts/).
-
+* -- is powered by -- [Amazon Cognito](https://aws.amazon.com/cognito/) 
+* see [concepts](../concepts)
+* TODO:
 To get started with defining your authentication resource, open or create the auth resource file:
 
 ```ts title="amplify/auth/resource.ts"
