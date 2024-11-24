@@ -1,38 +1,15 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-
-export const meta = {
-  title: 'Custom pipelines',
-  description: 'Set up fullstack CI/CD in a custom pipeline.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      meta
-    }
-  };
-
-}
-
-While building with Amplify CI/CD offers benefits such as zero-config setup, fullstack previews, centralized secrets management, Amplify Gen 2 makes it easy to integrate fullstack CI/CD into your custom pipelines (for example, AWS CodePipeline, Amazon CodeCatalyst, GitHub Actions, and more).
+* goal
+  * set up fullstack CI/CD | custom pipeline (_Example:_ AWS CodePipeline, Amazon CodeCatalyst, GitHub Actions) 
+  
+* Amplify CI/CD
+  * allows
+    * zero-config setup,
+    * fullstack previews,
+    * centralized secrets management
 
 ## Set up backend deployments
 
+* TODO:
 You can set up your backend deployments using the following steps:
 
 1.  Create an Amplify app by connecting a fullstack Gen 2 branch from your Git repository. This is a one time setup as for subsequent deployments, we will be using a custom pipeline.
