@@ -1,54 +1,22 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
+* goal
+  * summary of [`@aws-amplify/backend-cli`](https://www.npmjs.com/package/@aws-amplify/backend-cli) main commands
 
-export const meta = {
-  title: 'CLI commands',
-  description: 'Reference for CLI commands.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-  /**
-   * Notes for documentation:
-   * - only document 2 command levels deep. document further levels in the top-level command as usage examples but without additional subheading
-   *   - (good) ampx sandbox secret
-   *   - (bad) ampx sandbox secret set
-   * - all commands should describe:
-   *   - what the command is and when it is used
-   *   - unordered list of options
-   *   - usage examples
-   */
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      platform: context.params.platform,
-      meta
-    }
-  };
-}
-
-This page serves as a reference for commands found in the [`@aws-amplify/backend-cli`](https://www.npmjs.com/package/@aws-amplify/backend-cli) package.
-
-All commands can be prefixed with [AWS CLI environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html#envvars-list) to change the AWS account behavior with Amplify Gen 2 commands.
+* ALL next commands -- can be prefixed with -- [AWS CLI environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html#envvars-list)
+  * uses
+    * change the AWS account behavior
 
 ## npx ampx sandbox
 
-Sandbox enables you to develop your backend alongside your frontend's development server. Run `npx ampx sandbox` to deploy to your personal cloud sandbox, this command will automatically watch for changes in the `amplify/` folder, and redeploy each time you save a file.
+* Sandbox
+  * enables you to 
+    * 👀develop your backend + your frontend's development server 👀 
+* `npx ampx sandbox`
+  * deploy | your personal cloud sandbox /
+    * automatically watch for changes | `amplify/`
+      * == if you save a file | `amplify/` -> redeploy 
 
 ### Options
-
+* TODO:
 - `--dir-to-watch` (_string_) - Directory to watch for file changes. All subdirectories and files will be included. Defaults to the amplify directory.
 - `--exclude` (_string[]_) - An array of paths or glob patterns to ignore. Paths can be relative or absolute and can either be files or directories.
 - `--identifier` (_string_) - An optional name to distinguish between different sandbox environments. Default is the name of the system user executing the process
@@ -62,34 +30,30 @@ Sandbox enables you to develop your backend alongside your frontend's developmen
 
 ### Usage
 
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox
-```
+#### Use with an alternate profile 
 
-#### Use with an alternate profile
+* via `--profile`
+    ```bash title="Terminal" showLineNumbers={false}
+    npx ampx sandbox --profile my-other-profile
+    ```
+* via AWS CLI environment variables
+    ```bash title="Terminal" showLineNumbers={false}
+    AWS_PROFILE=my-other-profile ampx sandbox
+    ```
 
-You can use the `--profile` flag to run sandbox with an AWS profile other than `default`:
+#### Use with an alternate AWS Region
 
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox --profile my-other-profile
-```
+* via `AWS_REGION=SpecifiedRegion`
 
-Additionally, you can use AWS CLI environment variables to specify a different profile:
+    ```bash title="Terminal" showLineNumbers={false}
+    AWS_REGION=us-west-2 ampx sandbox
+    ```
 
-```bash title="Terminal" showLineNumbers={false}
-AWS_PROFILE=my-other-profile ampx sandbox
-```
-
-#### Use with an alternate Region
-
-Use AWS environment variables to deploy to a Region other than your AWS profile's configured Region:
-
-```bash title="Terminal" showLineNumbers={false}
-AWS_REGION=us-west-2 ampx sandbox
-```
+* Else -> AWS profile's configured Region
 
 #### Use with mobile applications
 
+* TODO:
 For mobile applications, you will need to set the output directory and format of the generated configuration file, specifically `amplify_outputs.json`:
 
 ```bash title="Terminal" showLineNumbers={false}
@@ -323,7 +287,6 @@ npx ampx generate graphql-client-code --format modelgen --type-target angular
 | Modelgen | Amplify Swift | `amplify codegen model` | `npx ampx generate graphql-client-code --format modelgen --model-target swift --out <path_to_swift_project>/AmplifyModels` | `<path_to_swift_project>/AmplifyModels` |
 | Modelgen | Amplify Flutter | `amplify codegen model` | `npx ampx generate graphql-client-code --format modelgen --model-target dart --out <path_to_flutter_project>/AmplifyModels` | `<path_to_flutter_project>/AmplifyModels` |
 
-
 ## npx ampx generate forms
 
 Generate React form components derived from your backend data models for your frontend application to consume.
@@ -345,39 +308,44 @@ npx ampx generate forms --branch $BRANCH_NAME --app-id $AWS_APP_ID --out-dir ./s
 
 ## npx ampx info
 
-Generates information on system, binaries, npm packages, and environment variables for troubleshooting Amplify issues.
+* generates information about
+  * system,
+  * binaries,
+  * npm packages,
+  * environment variables
+* uses
+  * troubleshooting Amplify issues
 
-```bash title="Terminal" showLineNumbers={false}
-npx ampx info
-```
+* _Example:_
+    ```bash title="Terminal" showLineNumbers={false}
+    npx ampx info
+    ```
 
-This command will print system information as follows:
-
-```bash title="Terminal" showLineNumbers={false}
-System:
-  OS: macOS 14.3.1
-  CPU: (10) arm64 Apple M1 Pro
-  Memory: 165.89 MB / 32.00 GB
-  Shell: /opt/homebrew/bin/fish
-Binaries:
-  Node: 20.12.2 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/node
-  Yarn: 1.22.19 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/yarn
-  npm: 10.5.0 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/npm
-  pnpm: 9.0.5 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/pnpm
-NPM Packages:
-  @aws-amplify/backend: 1.0.0
-  @aws-amplify/backend-cli: 1.0.1
-  aws-amplify: 6.2.0
-  aws-cdk: 2.139.1
-  aws-cdk-lib: 2.139.1
-  typescript: 5.4.5
-AWS environment variables:
-  AWS_PROFILE = amplify-admin
-  AWS_STS_REGIONAL_ENDPOINTS = regional
-  AWS_NODEJS_CONNECTION_REUSE_ENABLED = 1
-  AWS_SDK_LOAD_CONFIG = 1
-No CDK environment variables
-```
+    ```bash title="Terminal" showLineNumbers={false}
+    System:
+      OS: macOS 14.3.1
+      CPU: (10) arm64 Apple M1 Pro
+      Memory: 165.89 MB / 32.00 GB
+      Shell: /opt/homebrew/bin/fish
+    Binaries:
+      Node: 20.12.2 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/node
+      Yarn: 1.22.19 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/yarn
+      npm: 10.5.0 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/npm
+      pnpm: 9.0.5 - ~/Library/Caches/fnm_multishells/1063_1714573452292/bin/pnpm
+    NPM Packages:
+      @aws-amplify/backend: 1.0.0
+      @aws-amplify/backend-cli: 1.0.1
+      aws-amplify: 6.2.0
+      aws-cdk: 2.139.1
+      aws-cdk-lib: 2.139.1
+      typescript: 5.4.5
+    AWS environment variables:
+      AWS_PROFILE = amplify-admin
+      AWS_STS_REGIONAL_ENDPOINTS = regional
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED = 1
+      AWS_SDK_LOAD_CONFIG = 1
+    No CDK environment variables
+    ```
 
 ## npx ampx pipeline-deploy
 
