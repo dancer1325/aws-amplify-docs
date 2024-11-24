@@ -1,38 +1,16 @@
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-
-export const meta = {
-  title: 'Fullstack branch deployments',
-  description: 'Use fullstack branch deployments to test changes from feature branches.',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  return {
-    props: {
-      meta
-    }
-  };
-
-}
-
-Amplify code-first DX (Gen 2) offers fullstack branch deployments that allow you to automatically deploy infrastructure and application code changes from feature branches. This enables testing changes in an isolated environment before merging to the main branch.
+* goal
+  * fullstack branch deployments
+    * allows
+      * from feature branches -- automatically -- deploy changes about
+        * infrastructure 
+        * application code
+    * uses
+      * 👀from feature branches -- test -- changes 👀
+        * previous to merge to main branch
 
 ## Set up feature branch deployments
 
+* TODO:
 After you've deployed your [first branch](/[platform]/start/quickstart/), you can manually connect more, but the recommended workflow is to use the **branch auto-detection** feature.
 
 1. Log in to the [Amplify console](https://console.aws.amazon.com/amplify/home) and choose your app.
