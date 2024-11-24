@@ -1,41 +1,19 @@
-import { getChildPageNodes } from '@/utils/getChildPageNodes';
-import { getCustomStaticPath } from '@/utils/getCustomStaticPath';
-import { IconGithub } from '@/components/Icons/IconGithub'
-import { IconAmplify } from '@/components/Icons/IconAmplify'
+* goal
+  * get started with AWS Amplify Gen 2 | ANY `platforms`
 
-export const meta = {
-  title: 'Quickstart',
-  description: 'Get started with AWS Amplify Gen 2 and React, Next.js, Angular, Vue, Flutter, React Native, Swift, Android, and JavaScript.',
-  route: '/[platform]/start/quickstart',
-  platforms: [
-    'android',
-    'angular',
-    'flutter',
-    'javascript',
-    'nextjs',
-    'react',
-    'react-native',
-    'swift',
-    'vue'
-  ]
-};
+platforms = [
+        'android',
+        'angular',
+        'flutter',
+        'javascript',
+        'nextjs',
+        'react',
+        'react-native',
+        'swift',
+        'vue'
+      ]
 
-
-export const getStaticPaths = async () => {
-  return getCustomStaticPath(meta.platforms);
-};
-
-export function getStaticProps(context) {
-  const childPageNodes = getChildPageNodes(meta.route);
-  return {
-    props: {
-      meta,
-      childPageNodes
-    }
-  };
-}
-
-<InlineFilter filters={["javascript"]}>
+# | "javascript"
 
 * goal
   1. Deploy a Vanilla JavaScript app -- via -- Vite
@@ -44,86 +22,14 @@ export function getStaticProps(context) {
 
 * see [amplify-js-app](./amplify-js-app/README.md)
 
-### Deploy cloud sandbox
-* TODO:
-To deploy your backend use Amplify's per-developer cloud sandbox. This feature provides a separate backend environment for every developer on a team, ideal for local development and testing. To run your application with a sandbox environment, you can run the following command:
+# | "react"
 
-```bash title="Terminal" showLineNumbers={false}
-npx ampx sandbox
-```
+* goal
+  1. Deploy a React and Vite app
+  2. Build and connect to a database with real-time data updates
+  3. Configure authentication and authorization rules
 
-Once the sandbox environment is deployed, it will create a GraphQL API, database, and auth service. All the deployed resources will be available in the `amplify_outputs.json`.
-
-## Connect frontend to backend
-
-The initial scaffolding already has a pre-configured data backend defined in the `amplify/data/resource.ts` file. The default example will create a Todo model with `content` field. Update your main.js file to create new to-do items.
-
-```typescript title="src/main.ts"
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "../amplify/data/resource";
-import './style.css';
-import { Amplify } from 'aws-amplify';
-import outputs from '../amplify_outputs.json';
-
-Amplify.configure(outputs);
-
-
-const client = generateClient<Schema>();
-
-document.addEventListener("DOMContentLoaded", function () {
-    const todos: Array<Schema["Todo"]["type"]> = [];
-    const todoList = document.getElementById("todoList") as HTMLUListElement;
-    const addTodoButton = document.getElementById("addTodo") as HTMLButtonElement;
-
-    addTodoButton.addEventListener("click", createTodo);
-
-    function updateUI() {
-        todoList.innerHTML = '';
-        todos.forEach(todo => {
-            const li = document.createElement('li');
-            li.textContent = todo.content ?? '';
-            todoList.appendChild(li);
-        });
-    }
-
-    function createTodo() {
-      console.log('createTodo');
-      const content = window.prompt("Todo content");
-      if (content) {
-          client.models.Todo.create({ content }).then(response => {
-              if (response.data && !response.errors) {
-                  todos.push(response.data);
-                  updateUI();
-              } else {
-                  console.error('Error creating todo:', response.errors);
-                  alert('Failed to create todo.');
-              }
-          }).catch(error => {
-              console.error('Network or other error:', error);
-              alert('Failed to create todo due to a network or other error.');
-          });
-      }
-  }
-
-
-    client.models.Todo.observeQuery().subscribe({
-        next: (data) => {
-            todos.splice(0, todos.length, ...data.items);
-            updateUI();
-        }
-    });
-});
-```
-
-</InlineFilter>
-
-<InlineFilter filters={["react"]}>
-
-👋 Welcome to AWS Amplify! In this quickstart guide, you will:
-
-1. Deploy a React and Vite app
-2. Build and connect to a database with real-time data updates
-3. Configure authentication and authorization rules
+* TODO: create specific project for it
 
 ## Deploy a fullstack app to AWS
 
@@ -444,35 +350,24 @@ git push
 
 Once your build completes in the Amplify Console, the `main` backend will update to support the changes made within the cloud sandbox. The data in the cloud sandbox is fully isolated and won't pollute your production database.
 
-</InlineFilter>
+# | "nextjs"
 
 
-
-
-
-<InlineFilter filters={["nextjs"]}>
-
-👋 Welcome to AWS Amplify! In this quickstart guide, you will:
-
-1. Deploy a Next.js app
-2. Build and connect to a database with real-time data updates
-3. Configure authentication and authorization rules
+* goal
+  1. Deploy a Next.js app
+  2. Build and connect to a database with real-time data updates
+  3. Configure authentication and authorization rules
 
 We have two Quickstart guides you can follow:
 
 <Overview childPageNodes={props.childPageNodes} />
 
-</InlineFilter>
+# | "vue"
 
-
-
-<InlineFilter filters={["vue"]}>
-
-👋 Welcome to AWS Amplify! In this quickstart guide, you will:
-
-1. Deploy a Vue.js app
-2. Build and connect to a database with real-time data updates
-3. Configure authentication and authorization rules
+* goal
+  1. Deploy a Vue.js app
+  2. Build and connect to a database with real-time data updates
+  3. Configure authentication and authorization rules
 
 ## Deploy a fullstack app to AWS
 
@@ -778,21 +673,13 @@ git push
 
 Once your build completes in the Amplify Console, the `main` backend will update to support the changes made within the cloud sandbox. The data in the cloud sandbox is fully isolated and won't pollute your production database.
 
-</InlineFilter>
+# | "angular"
 
 
-
-
-
-
-
-<InlineFilter filters={["angular"]}>
-
-👋 Welcome to AWS Amplify! In this quickstart guide, you will:
-
-1. Deploy an Angular app
-2. Build and connect to a database with real-time data updates
-3. Configure authentication and authorization rules
+* goal
+  1. Deploy an Angular app
+  2. Build and connect to a database with real-time data updates
+  3. Configure authentication and authorization rules
 
 ## Deploy a fullstack app to AWS
 
@@ -1103,15 +990,8 @@ git push
 
 Once your build completes in the Amplify Console, the `main` backend will update to support the changes made within the cloud sandbox. The data in the cloud sandbox is fully isolated and won't pollute your production database.
 
+# | "flutter"
 
-</InlineFilter>
-
-
-
-
-
-
-<InlineFilter filters={["flutter"]}>
 
 ## Prerequisites
 
@@ -1178,6 +1058,7 @@ npx ampx sandbox
 
 ```
 </InlineFilter>
+
 <InlineFilter filters={["flutter"]}>
 ```bash title="Terminal" showLineNumbers={false}
 npx ampx sandbox --outputs-format dart --outputs-out-dir lib
@@ -1544,18 +1425,7 @@ You can terminate the sandbox environment now to clean up the project.
 
 Publishing changes to the cloud requires a remote git repository. Amplify offers fullstack branch deployments that allow you to automatically deploy infrastructure and application code changes from feature branches. To learn more, visit the [fullstack branch deployments guide](/[platform]/deploy-and-host/fullstack-branching/branch-deployments).
 
-</InlineFilter>
-
-
-
-
-
-
-
-
-
-
-<InlineFilter filters={["swift"]}>
+# | "swift"
 
 ## Prerequisites
 
@@ -2003,17 +1873,12 @@ You can terminate the sandbox environment now to clean up the project.
 
 Publishing changes to the cloud requires a remote git repository. Amplify offers fullstack branch deployments that allow you to automatically deploy infrastructure and application code changes from feature branches. To learn more, visit the [fullstack branch deployments guide](/[platform]/deploy-and-host/fullstack-branching/branch-deployments).
 
-</InlineFilter>
+# | "android"
 
-
-
-
-<InlineFilter filters={["android"]}>
-
-👋 Welcome to AWS Amplify! In this quickstart guide, you will:
-1. deploy an Amplify backend database and authentication
-2. connect to the backend from an Android app
-3. make backend updates
+* goal
+  1. deploy an Amplify backend database and authentication
+  2. connect to the backend from an Android app
+  3. make backend updates
 
 ## Deploy Amplify backend to AWS
 
@@ -2466,18 +2331,8 @@ Also update your `amplify_outputs` file with the latest outputs information.
 npx @aws-amplify/backend-cli generate outputs --out-dir app/src/main/res/raw --app-id <your-amplify-app-id> --branch main
 ```
 
+# | "react-native"
 
-</InlineFilter>
-
-
-
-
-
-
-
-
-
-<InlineFilter filters={['react-native']}>
 ## Prerequisites
 
 Before you get started, make sure you have the following installed:
@@ -2804,14 +2659,6 @@ You can terminate the sandbox environment now to clean up the project.
 
 ### Publishing changes to cloud
 
-Publishing changes to the cloud requires a remote git repository. Amplify offers fullstack branch deployments that allow you to automatically deploy infrastructure and application code changes from feature branches. To learn more, visit the [fullstack branch deployments guide](/[platform]/deploy-and-host/fullstack-branching/branch-deployments).
-
-</InlineFilter>
-
-<InlineFilter filters={["javascript", "react-native", "angular", "react", "vue", "android", "swift", "flutter"]}>
-
-## 🥳 Success
-
-That's it! You have successfully built a fullstack app on AWS Amplify. If you want to learn more about how to work with Amplify, here's the conceptual guide for [how Amplify works](/[platform]/how-amplify-works/concepts/).
-
-</InlineFilter>
+Publishing changes to the cloud requires a remote git repository.
+Amplify offers fullstack branch deployments that allow you to automatically deploy infrastructure and application code changes from feature branches.
+To learn more, visit the [fullstack branch deployments guide](/[platform]/deploy-and-host/fullstack-branching/branch-deployments).
