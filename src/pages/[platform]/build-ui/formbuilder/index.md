@@ -2,7 +2,7 @@
   * 👀-- are bound to a -- model | your app's data schema 👀
   * once it's submitted -> record is automatically created or updated | bound data model
     * / SOME or ALL of the form's input fields -- are mapped to -- fields | data model
-  * automatically work with any Amplify GraphQL API /
+  * 👀automatically work with any Amplify GraphQL API /👀
     * 👀NO `onSubmit` handling is required 👀
 
 ## Generate forms
